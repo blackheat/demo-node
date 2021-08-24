@@ -21,8 +21,10 @@ const getNtpTime = async () => {
 
 app.get('/', async (req, res) => {
   const ntpDate = await getNtpTime();
-  res.send(`Current NTP Time: ${ntpDate}`);
+  res.render('index', {ntpDate: ntpDate});
 });
+
+app.set('view engine', 'ejs')
 
 app.listen(port, host, () => {
   console.log(`Start serving requests at http://${host}:${port}`);

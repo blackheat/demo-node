@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Node.js Blog</title>
+</head>
+<body>
+  <h1>Hello world</h1>
+  <p id="ntpDateDisplay"></p>
+</body>
+<script>
+  let ntpDate = new Date('<%= ntpDate %>');
+  setInterval(function() {
+    ntpDate = new Date(ntpDate.getTime() + 1000);
+    document.getElementById("ntpDateDisplay").innerHTML = ntpDate;
+  }, 1000);
+</script>
+</html>
