@@ -19,9 +19,14 @@ const getNtpTime = async () => {
   });
 };
 
-app.get('/', async (req, res) => {
-  const ntpDate = await getNtpTime();
-  res.render('index', {ntpDate: ntpDate});
+app.get('/', (req, res) => {
+  res.render('index', {
+    plainUrl: req.protocol + '://' + req.get('Host') + req.url
+  });
+});
+
+app.get('/plain/ntp', async (req, res) => {
+  res.send(await getNtpTime());
 });
 
 app.set('view engine', 'ejs')

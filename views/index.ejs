@@ -9,10 +9,16 @@
   <p id="ntpDateDisplay"></p>
 </body>
 <script>
-  let ntpDate = new Date('<%= ntpDate %>');
+  const plainUrl = "<%= plainUrl %>";
+
   setInterval(function() {
-    ntpDate = new Date(ntpDate.getTime() + 1000);
-    document.getElementById("ntpDateDisplay").innerHTML = ntpDate;
+    request = new XMLHttpRequest();
+    request.overrideMimeType("application/json");
+    request.open("GET", `${plainUrl}plain/ntp`);
+    request.onload  = function() {
+      document.getElementById("ntpDateDisplay").innerHTML = request.responseText;
+    };
+    request.send();
   }, 1000);
 </script>
 </html>
